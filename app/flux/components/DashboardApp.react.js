@@ -36,7 +36,20 @@ var App = React.createClass({
 var Inbox = React.createClass({
   render: function() {
     return (
-      <h1>Inbox</h1>
+      <div>
+        <h1>Inbox</h1>
+        <Link to="message" params={{messageId: "123"}}>Message ID 123</Link>
+        <RouteHandler />
+      </div>
+    );
+  }
+});
+
+var Message = React.createClass({
+  mixins: [Router.State],
+  render: function() {
+    return (
+      <p>This is my message and my ID is {this.getParams().messageId}</p>
     );
   }
 });
@@ -67,8 +80,12 @@ var NotFound = React.createClass({
 
 var routes = (
   <Route name="app" path="/" handler={App}>
-    <Route name="inbox" handler={Inbox} />
+    <Route name="inbox" handler={Inbox}>
+      <Route name="message" path=":messageId" handler={Message} />
+    </Route>
+
     <Route name="calendar" handler={Calendar} />
+
     <DefaultRoute handler={Dashboard} />
     <NotFoundRoute handler={NotFound}/>
     <Redirect from="company" to="about" />

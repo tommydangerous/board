@@ -38,7 +38,9 @@ var Inbox = React.createClass({
     return (
       <div>
         <h1>Inbox</h1>
-        <Link to="message" params={{messageId: "123"}}>Message ID 123</Link>
+        <Link to="message" params={{messageId: "123"}} query={{foo: "bar"}}>
+          Message ID 123
+        </Link>
         <RouteHandler />
       </div>
     );
